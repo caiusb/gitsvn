@@ -16,7 +16,9 @@ import edu.illinois.gitsvn.analysis.EclipsePlatformDebug;
 import edu.illinois.gitsvn.analysis.EclipsePlatformTeam;
 import edu.illinois.gitsvn.analysis.EclipsePlatformText;
 import edu.illinois.gitsvn.analysis.FFmpegAnalysis;
+import edu.illinois.gitsvn.analysis.GitAnalysis;
 import edu.illinois.gitsvn.analysis.JUnitAnalysis;
+import edu.illinois.gitsvn.analysis.LinuxAnalysis;
 import edu.illinois.gitsvn.analysis.MPSAnalysis;
 import edu.illinois.gitsvn.analysis.PrototypeAnalysis;
 import edu.illinois.gitsvn.analysis.ThymeleafAnalysis;
@@ -35,8 +37,8 @@ public abstract class AnalysisLauncher {
 		List<AnalysisConfiguration> configurations = new ArrayList<AnalysisConfiguration>();
 		
 		configurations.add(new EclipseJDTCoreAnalysis());
-		configurations.add(new MPSAnalysis());
-		configurations.add(new ArduinoAnalysis());
+		//configurations.add(new MPSAnalysis());
+		//configurations.add(new ArduinoAnalysis());
 		configurations.add(new FFmpegAnalysis());
 		configurations.add(new CyclopsGroupAnalysis());
 		configurations.add(new ThymeleafAnalysis());
@@ -50,10 +52,12 @@ public abstract class AnalysisLauncher {
 		configurations.add(new JUnitAnalysis());
 		configurations.add(new PrototypeAnalysis());
 		configurations.add(new UPMAnalysis());
+		configurations.add(new LinuxAnalysis());
+		configurations.add(new GitAnalysis());
 		
 		
 		long before = System.nanoTime();
-		runParallel(configurations);
+		run(configurations);
 		long after = System.nanoTime();
 		
 		System.out.println((after - before) / 1000000);
@@ -61,7 +65,6 @@ public abstract class AnalysisLauncher {
 
 	private static void run(List<AnalysisConfiguration> configurations) {
 		for (int i = 0; i < configurations.size(); i++) {
-			System.out.println("\n" + (i + 1) + " / " + configurations.size());
 			configurations.get(i).run();
 		}
 	}

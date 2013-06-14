@@ -5,6 +5,7 @@ import org.eclipse.jgit.api.Git;
 import edu.illinois.gitsvn.infra.collectors.AuthorCollector;
 import edu.illinois.gitsvn.infra.collectors.CSVCommitPrinter;
 import edu.illinois.gitsvn.infra.collectors.DateCollector;
+import edu.illinois.gitsvn.infra.collectors.MaturityCollector;
 import edu.illinois.gitsvn.infra.collectors.SHACollector;
 import edu.illinois.gitsvn.infra.collectors.diff.ModifyDiffCountFilter;
 import edu.illinois.gitsvn.infra.collectors.diff.ModifyFileAllLineNumberFilter;
@@ -26,14 +27,16 @@ import edu.illinois.gitsvn.infra.filters.blacklister.MultipleParentCommitBlackli
  */
 public abstract class AnalysisConfiguration {
 
+	private MaturityCollector maturityCollector;
+
 	public void run() {
 		RepositoryCrawler crawler = new RepositoryCrawler();
 		PipelineCommitFilter pipeline = configureAnalysis();
 		Git repo = getGitRepo();
 
-		System.out.println("Running for: " + getProjectName());
 		crawler.crawlRepo(repo, pipeline);
-		System.out.println("Finished for: " + getProjectName());
+		float maturity = maturityCollector.getMaturity();
+		System.out.println("Maturity for " + getProjectName() + " is: " + maturity);
 	}
 
 	/**
@@ -75,19 +78,22 @@ public abstract class AnalysisConfiguration {
 		MetadataService.getService().pushInfo(CSVCommitPrinter.PROJ_NAME_PROP, getProjectName());
 		PipelineCommitFilter pipeLineFilter = new PipelineCommitFilter();
 
-		pipeLineFilter.addFilter(FileOperationBlacklister.getAddDiffFilter());
-		pipeLineFilter.addFilter(FileOperationBlacklister.getDeleteDiffFilter());
-		pipeLineFilter.addFilter(FileOperationBlacklister.getRenameDiffFilter());
-		pipeLineFilter.addFilter(new MergeMessageCommitBlackLister());
-		pipeLineFilter.addFilter(new MultipleParentCommitBlacklister());
-		pipeLineFilter.addFilter(new CopyrightJavadocImportBlacklister());
-		pipeLineFilter.addFilter(new CVSManufacturedCommitBlacklister());
-
-		pipeLineFilter.addDataCollector(new SHACollector());
-		pipeLineFilter.addDataCollector(new DateCollector());
-		pipeLineFilter.addDataCollector(new AuthorCollector());
-		pipeLineFilter.addDataCollector(new ModifyFileAllLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
-		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
+//		pipeLineFilter.addFilter(FileOperationBlacklister.getAddDiffFilter());
+//		pipeLineFilter.addFilter(FileOperationBlacklister.getDeleteDiffFilter());
+//		pipeLineFilter.addFilter(FileOperationBlacklister.getRenameDiffFilter());
+//		pipeLineFilter.addFilter(new MergeMessageCommitBlackLister());
+//		pipeLineFilter.addFilter(new MultipleParentCommitBlacklister());
+//		pipeLineFilter.addFilter(new CopyrightJavadocImportBlacklister());
+//		pipeLineFilter.addFilter(new CVSManufacturedCommitBlacklister());
+//
+//		pipeLineFilter.addDataCollector(new SHACollector());
+//		pipeLineFilter.addDataCollector(new DateCollector());
+//		pipeLineFilter.addDataCollector(new AuthorCollector());
+//		pipeLineFilter.addDataCollector(new ModifyFileAllLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
+//		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
+		
+		maturityCollector = new MaturityCollector();
+		pipeLineFilter.addDataCollector(maturityCollector);
 
 		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
 		pipeLineFilter.setDataAgregator(agregator);
