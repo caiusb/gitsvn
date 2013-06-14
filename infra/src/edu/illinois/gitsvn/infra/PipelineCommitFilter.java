@@ -30,7 +30,7 @@ public class PipelineCommitFilter extends CommitFilter {
 		if (!(collector instanceof DataCollector))
 			throw new InvalidParameterException("The collector should be a DataCollector");
 		
-		collectors.add(collector);
+		collectors.add(0, collector);
 	}
 
 	public List<DataCollector> getAllCollectors() {
