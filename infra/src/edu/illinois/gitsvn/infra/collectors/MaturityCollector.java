@@ -14,24 +14,23 @@ import edu.illinois.gitsvn.infra.DataCollector;
 public class MaturityCollector extends CommitFilter implements DataCollector {
 
 	private int mergeCommits;
-	private int normalCommits;
+	private int noOfGitCommits;
 
 	@Override
 	public boolean include(RevWalk walker, RevCommit cmit)
 			throws StopWalkException, MissingObjectException,
 			IncorrectObjectTypeException, IOException {
 		if (cmit.isGitCommit()) {
+			noOfGitCommits++;
 			int parentCount = cmit.getParentCount();
 			if (parentCount > 1)
 				mergeCommits++;
-			else
-				normalCommits++;
 		} 
 		return false;
 	}
 	
 	public float getMaturity() {
-		return (float)mergeCommits/(float)normalCommits;
+		return (float)mergeCommits/(float)noOfGitCommits;
 	}
 
 	@Override
