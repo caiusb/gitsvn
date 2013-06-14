@@ -35,8 +35,10 @@ public class CutofDetectorFilter extends CommitFilter implements AbstractSVNDete
 			IncorrectObjectTypeException, IOException {
 		
 		int commitTime = cmit.getCommitTime();
-		if (commitTime < cutofTime)
+		if (commitTime < cutofTime) {
 			mode = SVN;
+			cmit.markAsNotGitCommit();
+		}
 		else
 			mode = GIT;
 		
