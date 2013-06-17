@@ -41,12 +41,12 @@ public class CutofDetectorCollector extends CommitFilter implements AbstractSVND
 			return treatGit();
 	}
 
-	private boolean treatGit() {
+	protected boolean treatGit() {
 		mode = GIT;
 		return true;
 	}
 
-	private boolean treatSVN() {
+	protected boolean treatSVN() {
 		mode = SVN;
 		return true;
 	}
