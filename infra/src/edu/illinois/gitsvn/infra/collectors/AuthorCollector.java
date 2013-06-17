@@ -1,6 +1,8 @@
 package edu.illinois.gitsvn.infra.collectors;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.jgit.errors.IncorrectObjectTypeException;
 import org.eclipse.jgit.errors.MissingObjectException;
@@ -14,6 +16,7 @@ import edu.illinois.gitsvn.infra.DataCollector;
 public class AuthorCollector  extends CommitFilter implements DataCollector{
 
 	private String name;
+	private Set<String> authors = new HashSet<String>();
 
 	@Override
 	public String name() {
@@ -28,7 +31,11 @@ public class AuthorCollector  extends CommitFilter implements DataCollector{
 	@Override
 	public boolean include(RevWalk walker, RevCommit cmit) throws StopWalkException, MissingObjectException, IncorrectObjectTypeException, IOException {
 		name = cmit.getAuthorIdent().getName();
-		
+		authors.add(name);
 		return true;
+	}
+	
+	public Set<String> getAuthors() {
+		return authors ;
 	}
 }
