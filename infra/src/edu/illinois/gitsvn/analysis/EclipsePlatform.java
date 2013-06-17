@@ -7,7 +7,7 @@ import org.eclipse.jgit.api.Git;
 
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
-import edu.illinois.gitsvn.infra.collectors.CutofDetectorFilter;
+import edu.illinois.gitsvn.infra.collectors.CutofDetectorCollector;
 
 public class EclipsePlatform extends AnalysisConfiguration {
 
@@ -30,7 +30,7 @@ public class EclipsePlatform extends AnalysisConfiguration {
 	@Override
 	protected PipelineCommitFilter configureAnalysis() {
 		PipelineCommitFilter analysis = super.configureAnalysis();
-		analysis.addDataCollector(new CutofDetectorFilter(1317272400));
+		analysis.addDataCollector(new CutofDetectorCollector(1317272400));
 		return analysis;
 	}
 

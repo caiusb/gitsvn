@@ -7,7 +7,7 @@ import org.eclipse.jgit.api.Git;
 
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
-import edu.illinois.gitsvn.infra.collectors.CutofDetectorFilter;
+import edu.illinois.gitsvn.infra.collectors.CutofDetectorCollector;
 
 public class ThymeleafAnalysis extends AnalysisConfiguration {
 
@@ -23,7 +23,7 @@ public class ThymeleafAnalysis extends AnalysisConfiguration {
 	@Override
 	protected PipelineCommitFilter configureAnalysis() {
 		PipelineCommitFilter configuredAnalysis = super.configureAnalysis();
-		configuredAnalysis.addDataCollector(new CutofDetectorFilter(1337530081));
+		configuredAnalysis.addDataCollector(new CutofDetectorCollector(1337530081));
 		return configuredAnalysis;
 	}
 

@@ -8,7 +8,7 @@ import org.eclipse.jgit.api.Git;
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
 import edu.illinois.gitsvn.infra.collectors.CppLineNumberCollector;
-import edu.illinois.gitsvn.infra.collectors.CutofDetectorFilter;
+import edu.illinois.gitsvn.infra.collectors.CutofDetectorCollector;
 
 public class JUnitAnalysis extends AnalysisConfiguration {
 
@@ -29,7 +29,7 @@ public class JUnitAnalysis extends AnalysisConfiguration {
 	@Override
 	protected PipelineCommitFilter configureAnalysis() {
 		PipelineCommitFilter configureAnalysis = super.configureAnalysis();
-		configureAnalysis.addDataCollector(new CutofDetectorFilter(1231818542));
+		configureAnalysis.addDataCollector(new CutofDetectorCollector(1231818542));
 		return configureAnalysis;
 	}
 

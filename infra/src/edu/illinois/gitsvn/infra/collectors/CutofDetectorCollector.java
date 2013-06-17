@@ -10,12 +10,12 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.gitective.core.filter.commit.CommitFilter;
 
 
-public class CutofDetectorFilter extends CommitFilter implements AbstractSVNDetector {
+public class CutofDetectorCollector extends CommitFilter implements AbstractSVNDetector {
 	
 	private String mode = "";
 	private int cutofTime = 1295380000;
 	
-	public CutofDetectorFilter(int cutofTime) {
+	public CutofDetectorCollector(int cutofTime) {
 		this.cutofTime = cutofTime;
 	}
 	

@@ -7,7 +7,7 @@ import org.eclipse.jgit.api.Git;
 
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
-import edu.illinois.gitsvn.infra.collectors.CutofDetectorFilter;
+import edu.illinois.gitsvn.infra.collectors.CutofDetectorCollector;
 
 public class CyclopsGroupAnalysis extends AnalysisConfiguration {
 
@@ -23,7 +23,7 @@ public class CyclopsGroupAnalysis extends AnalysisConfiguration {
 	@Override
 	protected PipelineCommitFilter configureAnalysis() {
 		PipelineCommitFilter configuredAnalysis = super.configureAnalysis();
-		configuredAnalysis.addDataCollector(new CutofDetectorFilter(1295380000));
+		configuredAnalysis.addDataCollector(new CutofDetectorCollector(1295380000));
 		return configuredAnalysis;
 	}
 
