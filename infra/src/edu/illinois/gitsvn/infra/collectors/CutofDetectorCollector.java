@@ -36,10 +36,18 @@ public class CutofDetectorCollector extends CommitFilter implements AbstractSVND
 		
 		int commitTime = cmit.getCommitTime();
 		if (commitTime < cutofTime)
-			mode = SVN;
+			return treatSVN();
 		else
-			mode = GIT;
-		
+			return treatGit();
+	}
+
+	private boolean treatGit() {
+		mode = GIT;
+		return true;
+	}
+
+	private boolean treatSVN() {
+		mode = SVN;
 		return true;
 	}
 
