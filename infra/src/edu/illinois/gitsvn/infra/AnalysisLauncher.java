@@ -65,7 +65,7 @@ public abstract class AnalysisLauncher {
 			AnalysisConfiguration analysisConfiguration = configurations.get(i);
 			analysisConfiguration.run();
 			int noOfAuthors = analysisConfiguration.getNoOfAuthors();
-			System.out.println("This repo has " + noOfAuthors + " authors");
+			System.out.println(analysisConfiguration.getProjectName() + " has " + noOfAuthors + " authors");
 		}
 	}
 	
