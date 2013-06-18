@@ -13,7 +13,7 @@ import org.gitective.core.filter.commit.CommitFilter;
 
 import edu.illinois.gitsvn.infra.DataCollector;
 
-public class AuthorCollector  extends CommitFilter implements DataCollector{
+public class AuthorCollector extends CommitFilter implements DataCollector{
 
 	private String name;
 	private Set<String> authors = new HashSet<String>();
