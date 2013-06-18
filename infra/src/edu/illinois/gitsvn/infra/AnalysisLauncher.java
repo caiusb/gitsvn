@@ -79,6 +79,8 @@ public abstract class AnalysisLauncher {
 				@Override
 				public Void call() throws Exception {
 					analysisConfiguration.run();
+					int noOfAuthors = analysisConfiguration.getNoOfAuthors();
+					System.out.println(analysisConfiguration.getProjectName() + " has " + noOfAuthors + " authors");
 					return null;
 				}
 			});
