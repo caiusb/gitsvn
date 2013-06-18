@@ -26,6 +26,8 @@ import edu.illinois.gitsvn.infra.filters.blacklister.MultipleParentCommitBlackli
  */
 public abstract class AnalysisConfiguration {
 
+	private AuthorCollector authorCollector;
+
 	public void run() {
 		RepositoryCrawler crawler = new RepositoryCrawler();
 		PipelineCommitFilter pipeline = configureAnalysis();
@@ -85,12 +87,17 @@ public abstract class AnalysisConfiguration {
 
 		pipeLineFilter.addDataCollector(new SHACollector());
 		pipeLineFilter.addDataCollector(new DateCollector());
-		pipeLineFilter.addDataCollector(new AuthorCollector());
+		authorCollector = new AuthorCollector();
+		pipeLineFilter.addDataCollector(authorCollector);
 		pipeLineFilter.addDataCollector(new ModifyFileAllLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 
 		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
 		pipeLineFilter.setDataAgregator(agregator);
 		return pipeLineFilter;
+	}
+	
+	public int getNoOfAuthors() {
+		return authorCollector.getAuthors().size();
 	}
 }
