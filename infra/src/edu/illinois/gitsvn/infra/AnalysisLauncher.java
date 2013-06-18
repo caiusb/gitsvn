@@ -62,7 +62,10 @@ public abstract class AnalysisLauncher {
 	private static void run(List<AnalysisConfiguration> configurations) {
 		for (int i = 0; i < configurations.size(); i++) {
 			System.out.println("\n" + (i + 1) + " / " + configurations.size());
-			configurations.get(i).run();
+			AnalysisConfiguration analysisConfiguration = configurations.get(i);
+			analysisConfiguration.run();
+			int noOfAuthors = analysisConfiguration.getNoOfAuthors();
+			System.out.println("This repo has " + noOfAuthors + " authors");
 		}
 	}
 	
