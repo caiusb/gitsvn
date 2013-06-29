@@ -4,3 +4,9 @@
 [submodule "gitective"]
 	path = gitective
 	url = git@github.com:caiusb/gitective.git
+[submodule "CodingSpectator"]
+	path = CodingSpectator
+	url = git@github.com:caiusb/CodingSpectator.git
+[submodule "BundleUpdater"]
+	path = BundleUpdater
+	url = https://github.com/reprogrammer/BundleUpdater.git
