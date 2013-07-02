@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: infra
-Bundle-SymbolicName: infra
+Bundle-SymbolicName: infra;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: edu.illinois.gitsvn.analysis,
  edu.illinois.gitsvn.infra,
@@ -11,4 +11,8 @@ Export-Package: edu.illinois.gitsvn.analysis,
  edu.illinois.gitsvn.infra.filters,
  edu.illinois.gitsvn.infra.filters.blacklister,
  edu.illinois.gitsvn.infra.util
-Require-Bundle: edu.illinois.codingtracker.tests;bundle-version="1.0.0"
+Require-Bundle: edu.illinois.codingtracker.tests;bundle-version="1.0.0",
+ edu.illinois.codingtracker.operations;bundle-version="1.0.0",
+ org.gitective.core;bundle-version="1.0.0",
+ org.junit;bundle-version="4.8.2"
+Bundle-ActivationPolicy: lazy
