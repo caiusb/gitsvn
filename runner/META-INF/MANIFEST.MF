@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Runner
+Bundle-SymbolicName: runner; singleton=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,
+ infra;bundle-version="1.0.0",
+ org.eclipse.ui;bundle-version="3.7.0"
+Bundle-RequiredBundle-ActivationPolicy: lazy
