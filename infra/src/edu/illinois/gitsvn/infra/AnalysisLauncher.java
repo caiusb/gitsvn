@@ -3,7 +3,10 @@ package edu.illinois.gitsvn.infra;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class responsible for running the analyses
@@ -23,7 +26,7 @@ public abstract class AnalysisLauncher {
 		populateWithConfigurations(configurations);
 		
 		long before = System.nanoTime();
-		runParallel(configurations);
+		runSerial(configurations);
 		long after = System.nanoTime();
 		
 		System.out.println((after - before) / 1000000);
@@ -53,6 +56,12 @@ public abstract class AnalysisLauncher {
 			});
 		}
 		
-		pool.invokeAll(list);
+		List<Future<Void>> tasks = pool.invokeAll(list);
+		for (Future<Void> task : tasks) {
+			try {
+				task.get();
+			} catch (InterruptedException | ExecutionException e) {
+			}
+		}
 	}
 }
