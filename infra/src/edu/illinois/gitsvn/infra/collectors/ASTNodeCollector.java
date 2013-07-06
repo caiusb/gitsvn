@@ -12,12 +12,18 @@ import org.eclipse.jgit.diff.DiffEntry.ChangeType;
 import org.eclipse.jgit.diff.DiffEntry.Side;
 import org.eclipse.jgit.lib.AbbreviatedObjectId;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.treewalk.TreeWalk;
+import org.eclipse.jgit.treewalk.filter.AndTreeFilter;
+import org.eclipse.jgit.treewalk.filter.TreeFilter;
+import org.eclipse.ui.internal.ide.misc.AndFileInfoMatcher;
 import org.gitective.core.BlobUtils;
 import org.gitective.core.filter.commit.DiffCountFilter;
 
 import edu.illinois.codingtracker.operations.ast.ASTOperation;
 import edu.illinois.codingtracker.tests.postprocessors.ast.AddDeleteUpdateInferencePostprocessor;
 import edu.illinois.gitsvn.infra.DataCollector;
+import edu.illinois.gitsvn.infra.filters.blacklister.NonSourceCodeFileExtensionBlacklister;
 
 public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	
@@ -38,6 +44,16 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 //		if (setOfOperationForLastCommit == null)
 //			return "0";
 		return "" + setOfOperationForLastCommit.size();
+	}
+	
+	@Override
+	protected TreeWalk createTreeWalk(RevWalk walker, RevCommit commit) {
+		// TODO Auto-generated method stub
+		TreeWalk treeWalk = super.createTreeWalk(walker, commit);
+		TreeFilter newFilter = AndTreeFilter.create(treeWalk.getFilter(), new NonSourceCodeFileExtensionBlacklister());
+		treeWalk.setFilter(newFilter);
+		return treeWalk;
+		
 	}
 	
 	@Override
