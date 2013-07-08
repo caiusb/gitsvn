@@ -37,7 +37,8 @@ public abstract class AnalysisLauncher {
 	private void runSerial(List<AnalysisConfiguration> configurations) {
 		for (int i = 0; i < configurations.size(); i++) {
 			System.out.println("\n" + (i + 1) + " / " + configurations.size());
-			configurations.get(i).run();
+			AnalysisConfiguration configuration = configurations.remove(i);
+			configuration.run();
 		}
 	}
 	
