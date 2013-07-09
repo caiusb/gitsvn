@@ -3,7 +3,6 @@ package edu.illinois.gitsvn.infra.collectors;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -16,7 +15,6 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.TreeWalk;
 import org.eclipse.jgit.treewalk.filter.AndTreeFilter;
 import org.eclipse.jgit.treewalk.filter.TreeFilter;
-import org.eclipse.ui.internal.ide.misc.AndFileInfoMatcher;
 import org.gitective.core.BlobUtils;
 import org.gitective.core.filter.commit.DiffCountFilter;
 
@@ -27,11 +25,10 @@ import edu.illinois.gitsvn.infra.filters.blacklister.NonSourceCodeFileExtensionB
 
 public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	
-	private Map<RevCommit, Set<ASTOperation>> astOperations;
 	private Set<ASTOperation> setOfOperationForLastCommit;
 	
 	public ASTNodeCollector() {
-		astOperations = new HashMap<RevCommit, Set<ASTOperation>>();
+		new HashMap<RevCommit, Set<ASTOperation>>();
 	}
 
 	@Override
@@ -75,7 +72,6 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 					Set<ASTOperation> diffAsASTNodeOperations = AddDeleteUpdateInferencePostprocessor
 							.getDiffAsASTNodeOperations(oldFileContent, newFileContent);
 					setOfOperationForLastCommit = diffAsASTNodeOperations;
-					astOperations.put(commit, diffAsASTNodeOperations);
 				} catch (CoreException e) {
 				}
 				break;
