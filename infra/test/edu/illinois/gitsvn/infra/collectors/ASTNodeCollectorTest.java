@@ -10,6 +10,7 @@ import org.gitective.core.CommitUtils;
 import org.gitective.tests.GitTestCase;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ASTNodeCollectorTest extends GitTestCase{
@@ -52,6 +53,7 @@ public class ASTNodeCollectorTest extends GitTestCase{
 	}
 	
 	@Test
+	@Ignore
 	public void testProblemCommitInJDTCore() throws Exception {
 		repository = Git.open(new File("../../svnToGitRepos/eclipse.jdt.core")).getRepository();
 		collector.setRepository(repository);
