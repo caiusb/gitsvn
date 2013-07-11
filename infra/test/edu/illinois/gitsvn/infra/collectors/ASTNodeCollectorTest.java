@@ -61,6 +61,7 @@ public class ASTNodeCollectorTest extends GitTestCase{
 		
 		RevCommit problemCommit = CommitUtils.getCommit(repository, "968a44abcc71c95b90a66b2bfce384792751e997");
 		collector.include(walker, problemCommit);
+		assertEquals("10",collector.getDataForCommit());
 	}
 
 }
