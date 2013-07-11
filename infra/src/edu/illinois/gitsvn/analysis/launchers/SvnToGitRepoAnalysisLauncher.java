@@ -2,6 +2,8 @@ package edu.illinois.gitsvn.analysis.launchers;
 
 import java.util.List;
 
+import org.junit.Test;
+
 import edu.illinois.gitsvn.analysis.CutoffGenericAnalysis;
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.AnalysisLauncher;
@@ -32,6 +34,11 @@ public class SvnToGitRepoAnalysisLauncher extends AnalysisLauncher {
 	}
 
 	public static void main(String[] args) throws Exception {
+		new SvnToGitRepoAnalysisLauncher().run();
+	}
+	
+	@Test
+	public void test() throws Exception {
 		new SvnToGitRepoAnalysisLauncher().run();
 	}
 }
