@@ -8,6 +8,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.core.resources.IWorkspaceDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
+
 /**
  * Class responsible for running the analyses
  * Subclasses should implement {@link populateWithConfigurations} in order to provide analysis configurations
@@ -24,6 +27,9 @@ public abstract class AnalysisLauncher {
 		List<AnalysisConfiguration> configurations = new ArrayList<AnalysisConfiguration>();
 		
 		populateWithConfigurations(configurations);
+		
+		IWorkspaceDescription workspaceDescription = ResourcesPlugin.getWorkspace().getDescription();
+		workspaceDescription.setAutoBuilding(false);
 		
 		long before = System.nanoTime();
 		runSerial(configurations);
