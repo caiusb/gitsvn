@@ -1,6 +1,7 @@
 package edu.illinois.gitsvn.infra.collectors;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Repository;
@@ -55,13 +56,17 @@ public class ASTNodeCollectorTest extends GitTestCase{
 	@Test
 	@Ignore
 	public void testProblemCommitInJDTCore() throws Exception {
-		repository = Git.open(new File("../../svnToGitRepos/eclipse.jdt.core")).getRepository();
-		collector.setRepository(repository);
-		walker = new RevWalk(repository);
+		setCustomRepo("../../svnToGitRepos/eclipse.jdt.core");
 		
 		RevCommit problemCommit = CommitUtils.getCommit(repository, "968a44abcc71c95b90a66b2bfce384792751e997");
 		collector.include(walker, problemCommit);
 		assertEquals("10",collector.getDataForCommit());
 	}
 
+	private void setCustomRepo(String customRepo) throws IOException {
+		repository = Git.open(new File(customRepo)).getRepository();
+		collector.setRepository(repository);
+		walker = new RevWalk(repository);
+	}
+	
 }
