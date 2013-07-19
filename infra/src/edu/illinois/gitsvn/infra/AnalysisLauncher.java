@@ -8,6 +8,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 
@@ -28,8 +29,10 @@ public abstract class AnalysisLauncher {
 		
 		populateWithConfigurations(configurations);
 		
-		IWorkspaceDescription workspaceDescription = ResourcesPlugin.getWorkspace().getDescription();
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceDescription workspaceDescription = workspace.getDescription();
 		workspaceDescription.setAutoBuilding(false);
+		workspace.setDescription(workspaceDescription);
 		
 		long before = System.nanoTime();
 		runSerial(configurations);
