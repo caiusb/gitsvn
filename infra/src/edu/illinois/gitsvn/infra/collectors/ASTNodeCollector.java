@@ -47,7 +47,8 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	protected TreeWalk createTreeWalk(RevWalk walker, RevCommit commit) {
 		// TODO Auto-generated method stub
 		TreeWalk treeWalk = super.createTreeWalk(walker, commit);
-		TreeFilter newFilter = AndTreeFilter.create(treeWalk.getFilter(), new NonSourceCodeFileExtensionBlacklister());
+		TreeFilter newFilter = AndTreeFilter.create(treeWalk.getFilter(), new NonSourceCodeFileExtensionBlacklister(
+				NonSourceCodeFileExtensionBlacklister.JAVA_EXTENSIONS));
 		treeWalk.setFilter(newFilter);
 		return treeWalk;
 		
