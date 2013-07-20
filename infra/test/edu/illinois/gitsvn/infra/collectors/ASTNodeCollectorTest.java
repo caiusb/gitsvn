@@ -69,4 +69,12 @@ public class ASTNodeCollectorTest extends GitTestCase{
 		walker = new RevWalk(repository);
 	}
 	
+	@Test
+	public void testProblemCommit() throws Exception {
+		setCustomRepo("../../svnToGitRepos/eclipse.platform");
+		
+		RevCommit problemCommit = CommitUtils.getCommit(repository, "4f91620b845ba0ff8d54203527f488a11e85480e");
+		collector.include(walker, problemCommit);
+	}
+	
 }
