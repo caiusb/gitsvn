@@ -17,7 +17,7 @@ import java.util.List;
  * @author mihai
  *
  */
-public class CSVCollectorAndWriter {
+public class CSVCollectorAndWriter implements CSVWriter {
 	private List<List<String>> rows;
 	private List<String> headers;
 
@@ -26,18 +26,34 @@ public class CSVCollectorAndWriter {
 		headers = new LinkedList<>();
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.illinois.gitsvn.infra.util.CSVWriter#addHeader(java.util.List)
+	 */
+	@Override
 	public void addHeader(List<String> headers) {
 		this.headers = headers;
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.illinois.gitsvn.infra.util.CSVWriter#getHeader()
+	 */
+	@Override
 	public List<String> getHeader() {
 		return headers;
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.illinois.gitsvn.infra.util.CSVWriter#addRow(java.util.List)
+	 */
+	@Override
 	public void addRow(List<String> row) {
 		rows.add(row);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.illinois.gitsvn.infra.util.CSVWriter#getRows()
+	 */
+	@Override
 	public List<List<String>> getRows() {
 		return rows;
 	}
