@@ -77,7 +77,7 @@ public class CSVCollectorAndWriter implements CSVWriter {
 		Files.write(path, content.toString().getBytes());
 	}
 	
-	public String getCSVString(){
+	private String getCSVString(){
 		return constructCSV();
 	}
 
