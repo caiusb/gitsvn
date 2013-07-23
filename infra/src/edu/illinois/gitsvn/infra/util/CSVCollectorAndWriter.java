@@ -17,11 +17,11 @@ import java.util.List;
  * @author mihai
  *
  */
-public class CSVWriter {
+public class CSVCollectorAndWriter {
 	private List<List<String>> rows;
 	private List<String> headers;
 
-	public CSVWriter() {
+	public CSVCollectorAndWriter() {
 		rows = new ArrayList<>();
 		headers = new LinkedList<>();
 	}

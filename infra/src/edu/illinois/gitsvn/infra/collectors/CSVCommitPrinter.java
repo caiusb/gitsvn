@@ -16,14 +16,14 @@ import edu.illinois.gitsvn.infra.DataCollector;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
 import edu.illinois.gitsvn.infra.filters.MetadataService;
-import edu.illinois.gitsvn.infra.util.CSVWriter;
+import edu.illinois.gitsvn.infra.util.CSVCollectorAndWriter;
 
 //TODO refactor this class to be a filter composite
 public class CSVCommitPrinter extends AnalysisFilter {
 	
 	public static final String PROJ_NAME_PROP = "ProjectName";
 
-	private CSVWriter csv;
+	private CSVCollectorAndWriter csv;
 	private List<DataCollector> allCollectors;
 	
 	public CSVCommitPrinter(PipelineCommitFilter filter) {
@@ -32,7 +32,7 @@ public class CSVCommitPrinter extends AnalysisFilter {
 	
 	@Override
 	public void begin() {
-		csv = new CSVWriter();
+		csv = new CSVCollectorAndWriter();
 		List<String> headerData = new ArrayList<>();
 		
 		allCollectors = filter.getAllCollectors();
@@ -53,7 +53,7 @@ public class CSVCommitPrinter extends AnalysisFilter {
 		}
 	}
 
-	public CSVWriter getCSVWriter() {
+	public CSVCollectorAndWriter getCSVWriter() {
 		return csv;
 	}
 
