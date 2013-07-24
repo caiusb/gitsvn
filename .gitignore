@@ -1,6 +1,5 @@
 *class
 .metadata
-
 infra/repos/
-*csv
+*.csv
 /infra/bin/
