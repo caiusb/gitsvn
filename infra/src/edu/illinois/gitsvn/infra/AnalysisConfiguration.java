@@ -4,6 +4,7 @@ import org.eclipse.jgit.api.Git;
 
 import edu.illinois.gitsvn.infra.collectors.ASTNodeCollector;
 import edu.illinois.gitsvn.infra.collectors.AuthorCollector;
+import edu.illinois.gitsvn.infra.collectors.BranchCollector;
 import edu.illinois.gitsvn.infra.collectors.CSVCommitPrinter;
 import edu.illinois.gitsvn.infra.collectors.DateCollector;
 import edu.illinois.gitsvn.infra.collectors.IssuesCollector;
@@ -92,6 +93,7 @@ public abstract class AnalysisConfiguration {
 		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 		pipeLineFilter.addDataCollector(new ASTNodeCollector());
 		pipeLineFilter.addDataCollector(new IssuesCollector());
+		pipeLineFilter.addDataCollector(new BranchCollector(getGitRepo().getRepository()));
 
 		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
 		pipeLineFilter.setDataAgregator(agregator);
