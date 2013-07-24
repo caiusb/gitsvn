@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class ImmediateCSVWriter extends CSVCollector {
@@ -34,7 +35,7 @@ public class ImmediateCSVWriter extends CSVCollector {
 		super.addRow(row);
 		byte[] bytes = getBytesForList(row);
 		try {
-			Files.write(csvFilePath, bytes);
+			Files.write(csvFilePath, bytes, StandardOpenOption.APPEND);
 		} catch (IOException e) {
 		}
 	}
@@ -44,10 +45,11 @@ public class ImmediateCSVWriter extends CSVCollector {
 		for (String header : listOfThings) {
 			stringBuffer.append("\"");
 			stringBuffer.append(header);
-			stringBuffer.append(",");
 			stringBuffer.append("\"");
+			stringBuffer.append(",");
 		}
 		stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(","));
+		stringBuffer.append("\n");
 		
 		byte[] bytes = stringBuffer.toString().getBytes();
 		return bytes;
