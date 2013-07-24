@@ -2,7 +2,7 @@ package edu.illinois.gitsvn.infra.util;
 
 import java.util.List;
 
-public abstract class CSVCollector {
+public abstract class CSVCollector implements CSVWriter {
 
 	protected List<List<String>> rows;
 	protected List<String> headers;
