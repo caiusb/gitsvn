@@ -14,7 +14,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.illinois.gitsvn.infra.util.CSVAtEndWriter;
+import edu.illinois.gitsvn.infra.csv.CSVAtEndWriter;
 
 public class CSVwriterTest {
 

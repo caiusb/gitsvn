@@ -14,10 +14,10 @@ import org.gitective.core.filter.commit.CommitFilter;
 
 import edu.illinois.gitsvn.infra.DataCollector;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
+import edu.illinois.gitsvn.infra.csv.CSVAtEndWriter;
+import edu.illinois.gitsvn.infra.csv.CSVWriter;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
 import edu.illinois.gitsvn.infra.filters.MetadataService;
-import edu.illinois.gitsvn.infra.util.CSVAtEndWriter;
-import edu.illinois.gitsvn.infra.util.CSVWriter;
 
 //TODO refactor this class to be a filter composite
 public class CSVCommitPrinter extends AnalysisFilter {
