@@ -17,9 +17,9 @@ import java.util.List;
  * @author mihai
  *
  */
-public class CSVCollectorAndWriter extends CSVCollector implements CSVWriter {
+public class CSVAtEndWriter extends CSVCollector implements CSVWriter {
 	
-	public CSVCollectorAndWriter() {
+	public CSVAtEndWriter() {
 		rows = new ArrayList<>();
 		headers = new LinkedList<>();
 	}
