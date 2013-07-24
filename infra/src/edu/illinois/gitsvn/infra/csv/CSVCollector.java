@@ -1,5 +1,7 @@
 package edu.illinois.gitsvn.infra.csv;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class CSVCollector implements CSVWriter {
@@ -8,7 +10,8 @@ public abstract class CSVCollector implements CSVWriter {
 	protected List<String> headers;
 
 	public CSVCollector() {
-		super();
+		rows = new ArrayList<>();
+		headers = new LinkedList<>();
 	}
 
 	public void addHeader(List<String> headers) {

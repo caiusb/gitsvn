@@ -19,11 +19,6 @@ import java.util.List;
  */
 public class CSVAtEndWriter extends CSVCollector {
 	
-	public CSVAtEndWriter() {
-		rows = new ArrayList<>();
-		headers = new LinkedList<>();
-	}
-
 	/**
 	 * Dump the contents to the provided path. If a file already at the existing path is deleted.
 	 * 
