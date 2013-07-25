@@ -3,6 +3,9 @@ package edu.illinois.gitsvn.infra.collectors;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -28,6 +31,11 @@ public class ASTNodeCollectorTest extends GitTestCase{
 		repository = Git.open(testRepo).getRepository();
 		collector.setRepository(repository);
 		walker = new RevWalk(repository);
+		
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceDescription workspaceDescription = workspace.getDescription();
+		workspaceDescription.setAutoBuilding(false);
+		workspace.setDescription(workspaceDescription);
 	}
 	
 	@After
