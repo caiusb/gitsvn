@@ -18,6 +18,7 @@ import edu.illinois.gitsvn.infra.filters.blacklister.CopyrightJavadocImportBlack
 import edu.illinois.gitsvn.infra.filters.blacklister.FileOperationBlacklister;
 import edu.illinois.gitsvn.infra.filters.blacklister.MergeMessageCommitBlackLister;
 import edu.illinois.gitsvn.infra.filters.blacklister.MultipleParentCommitBlacklister;
+import edu.illinois.gitsvn.infra.filters.blacklister.TooManyChangesBlacklister;
 
 /**
  * Runs a preconfigured analysis on a particular repo. Subclasses provide the
@@ -80,6 +81,7 @@ public abstract class AnalysisConfiguration {
 		pipeLineFilter.addFilter(FileOperationBlacklister.getAddDiffFilter());
 		pipeLineFilter.addFilter(FileOperationBlacklister.getDeleteDiffFilter());
 		pipeLineFilter.addFilter(FileOperationBlacklister.getRenameDiffFilter());
+		pipeLineFilter.addFilter(new TooManyChangesBlacklister());
 		pipeLineFilter.addFilter(new MergeMessageCommitBlackLister());
 		pipeLineFilter.addFilter(new MultipleParentCommitBlacklister());
 		pipeLineFilter.addFilter(new CopyrightJavadocImportBlacklister());
