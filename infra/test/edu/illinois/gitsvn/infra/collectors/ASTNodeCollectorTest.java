@@ -78,11 +78,13 @@ public class ASTNodeCollectorTest extends GitTestCase{
 	}
 	
 	@Test
+	@Ignore // is takes a very long time to run
 	public void testProblemCommitInJunit() throws Exception {
 		setCustomRepo("../../svnToGitRepos/junit");
 		
 		RevCommit problemCommit = CommitUtils.getCommit(repository, "30f2b16525dabb477373be9ed3e76bb98b200806");
 		collector.include(walker, problemCommit);
+		assertEquals("0",collector.getDataForCommit());
 	}
 	
 }
