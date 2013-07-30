@@ -13,13 +13,6 @@ import org.eclipse.jgit.errors.StopWalkException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.api.errors.CheckoutConflictException;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRefNameException;
-import org.eclipse.jgit.api.errors.RefAlreadyExistsException;
-import org.eclipse.jgit.api.errors.RefNotFoundException;
-import org.eclipse.jgit.api.CheckoutCommand;
-import org.eclipse.jgit.api.CreateBranchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -44,7 +37,6 @@ public class BranchCollector extends CommitFilter implements DataCollector {
 	public BranchCollector(Repository repository) {
 		this.repository = repository;
 		this.git = new Git(repository);
-		this.branchesCheckout(repository);
 		if(masterRef == null) {
 			this.masterRef = this.findMasterRef();
 		} 
@@ -58,45 +50,6 @@ public class BranchCollector extends CommitFilter implements DataCollector {
 		}
 		return null;
 	}
-	
-	public void branchesCheckout(Repository repository) {
-		String branchName = "";
-		Set<Entry<String, Ref>> refs = repository.getAllRefs().entrySet();
-		for (Entry<String, Ref> ref : refs) {
-			if(ref.getKey().startsWith(Constants.R_REMOTES) && !ref.getKey().contains(Constants.HEAD)) {
-				branchName = ref.getValue().getName().split(Constants.R_REMOTES)[1];
-				//TODO: replace with logging
-				System.out.println("Trying to checkout branch: " + branchName + " (" + branchName.split("origin/")[1] + ")");
-				CheckoutCommand checkoutCommand = this.git.checkout();
-				checkoutCommand.setForce(true);
-				checkoutCommand.setCreateBranch(true);
-				checkoutCommand.setUpstreamMode(CreateBranchCommand.SetupUpstreamMode.TRACK);
-				checkoutCommand.setName(branchName.split("origin/")[1]);
-				checkoutCommand.setStartPoint(branchName);
-				try {
-					checkoutCommand.call();
-					//TODO: replace with logging
-					//println "Successfully checked out branch " + branchName;
-				} catch (RefAlreadyExistsException e) {
-					//TODO: replace with logging
-					//println "Skipping branch (already exists): " + branchName;
-				} catch (CheckoutConflictException e) {
-					//TODO: replace with logging
-//					println "There were conflicts on ${branchName} branch checkout: " + e.getMessage()
-				} catch (RefNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (InvalidRefNameException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch ( GitAPIException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-	
 	
 	/**
 	 * find out which branch that specified commit come from.
