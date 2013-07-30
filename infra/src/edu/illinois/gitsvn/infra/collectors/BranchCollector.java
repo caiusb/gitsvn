@@ -46,7 +46,7 @@ public class BranchCollector extends CommitFilter implements DataCollector {
 	public BranchCollector(Repository repository) {
 		this.repository = repository;
 		this.git = new Git(repository);
-		this.branchesCheckout();
+		this.branchesCheckout(repository);
 		if(masterRef == null) {
 			this.masterRef = this.findMasterRef();
 		} 
@@ -61,7 +61,7 @@ public class BranchCollector extends CommitFilter implements DataCollector {
 		return null;
 	}
 	
-	public void branchesCheckout() {
+	public void branchesCheckout(Repository repository) {
 		String branchName = "";
 		Set<Entry<String, Ref>> refs = repository.getAllRefs().entrySet();
 		for (Entry<String, Ref> ref : refs) {
