@@ -34,9 +34,9 @@ public class BranchCollector extends CommitFilter implements DataCollector {
 	
 	private static final String MASTER_REF_KEY = "refs/heads/master";
 	 
-	public BranchCollector(Repository repository) {
-		this.repository = repository;
-		this.git = new Git(repository);
+	public BranchCollector(Git git) {
+		this.git = git;
+		this.repository = git.getRepository();
 		if(masterRef == null) {
 			this.masterRef = this.findMasterRef();
 		} 
