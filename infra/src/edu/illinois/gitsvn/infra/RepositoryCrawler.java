@@ -1,6 +1,7 @@
 package edu.illinois.gitsvn.infra;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -20,14 +21,27 @@ public class RepositoryCrawler {
 	}
 
 	public void crawlRepo(Git repo, PipelineCommitFilter pipelineFilter) {
-		CommitFinder finder = new CommitFinder(repo.getRepository());
-
-		pipelineFilter.setRepository(repo);
+		CommitFinder finder = createFinderAndSetRepo(repo, pipelineFilter);
 		AnalysisFilter agregator = (AnalysisFilter) pipelineFilter.getAgregator();
-
-		finder.setFilter(pipelineFilter);
 		agregator.begin();
 		finder.findInBranches();
+		agregator.end();
+	}
+
+	private CommitFinder createFinderAndSetRepo(Git repo, PipelineCommitFilter pipelineFilter) {
+		CommitFinder finder = new CommitFinder(repo.getRepository());
+		finder.setFilter(pipelineFilter);
+		pipelineFilter.setRepository(repo);
+		return finder;
+	}
+	
+	public void crawlRepo(Git repo, PipelineCommitFilter pipelineFilter, List<String> startCommitIDs) {
+		CommitFinder finder = createFinderAndSetRepo(repo, pipelineFilter);
+		AnalysisFilter agregator = (AnalysisFilter) pipelineFilter.getAgregator();
+		agregator.begin();
+		for (String commitID : startCommitIDs) {
+			finder.findFrom(commitID);
+		}
 		agregator.end();
 	}
 

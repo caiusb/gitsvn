@@ -1,9 +1,10 @@
 package edu.illinois.gitsvn.infra;
 
-import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.revwalk.RevCommit;
 import org.gitective.tests.GitTestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,5 +33,16 @@ public class RepositoryCrawlerTest extends GitTestCase{
 		CSVCommitPrinter agregator = (CSVCommitPrinter) pipeline.getAgregator();
 		List<List<String>> rows = agregator.getCSVWriter().getRows();
 		assertEquals(3,rows.size());
+	}
+	
+	@Test
+	public void testStartNotAtTheBegining() throws Exception {
+		RevCommit commit = add("file1.java","Smth","first");
+		add("file2.java","Smth else", "second");
+		PipelineCommitFilter pipeline = ConfigurationUtil.configureAnalysis();
+		crawler.crawlRepo(Git.open(testRepo), pipeline, Arrays.asList(new String[]{ commit.getName() }));
+		CSVCommitPrinter agregator = (CSVCommitPrinter) pipeline.getAgregator();
+		int noOfRows = agregator.getCSVWriter().getRows().size();
+		assertEquals(1, noOfRows);
 	}
 }
