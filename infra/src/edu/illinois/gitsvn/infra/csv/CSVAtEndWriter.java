@@ -38,6 +38,7 @@ public class CSVAtEndWriter extends CSVCollector {
 		Files.write(path, content.toString().getBytes());
 	}
 	
+	@Override
 	public void close() throws IOException {
 	}
 

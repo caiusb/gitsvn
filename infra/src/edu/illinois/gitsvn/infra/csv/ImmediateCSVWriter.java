@@ -68,4 +68,9 @@ public class ImmediateCSVWriter extends CSVCollector {
 		return bytes;
 	}
 
+	@Override
+	public void close() throws IOException {
+		// nothing
+	}
+
 }
