@@ -1,6 +1,7 @@
 package edu.illinois.gitsvn.infra;
 
 import org.eclipse.jgit.api.Git;
+import org.gitective.core.filter.commit.CommitFilter;
 
 import edu.illinois.gitsvn.infra.collectors.ASTNodeCollector;
 import edu.illinois.gitsvn.infra.collectors.AuthorCollector;
@@ -29,9 +30,11 @@ import edu.illinois.gitsvn.infra.filters.blacklister.MultipleParentCommitBlackli
  */
 public abstract class AnalysisConfiguration {
 
+	protected PipelineCommitFilter pipeline;
+
 	public void run() {
 		RepositoryCrawler crawler = new RepositoryCrawler();
-		PipelineCommitFilter pipeline = configurePipelineAnalysis();
+		pipeline = configurePipelineAnalysis();
 		Git repo = getGitRepo();
 
 		System.out.println("Running for: " + getProjectName());
@@ -98,5 +101,9 @@ public abstract class AnalysisConfiguration {
 		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
 		pipeLineFilter.setDataAgregator(agregator);
 		return pipeLineFilter;
+	}
+
+	public CommitFilter getAggregator() {
+		return pipeline.getAgregator();
 	}
 }
