@@ -8,28 +8,41 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class ImmediateCSVWriter extends CSVCollector {
-	
-	private Path csvFilePath;
 
+	private Path csvFilePath;
+	private final boolean deleteIfExists;
+
+	/**
+	 * @deprecated Use {@link #ImmediateCSVWriter(String,boolean)} instead
+	 */
 	public ImmediateCSVWriter(String csvFile) {
+		this(csvFile, true);
+	}
+
+	public ImmediateCSVWriter(String csvFile, boolean deleteIfExists) {
+		this.deleteIfExists = deleteIfExists;
 		csvFilePath = Paths.get(csvFile);
-		try {
-			Files.deleteIfExists(csvFilePath);
-			Files.createFile(csvFilePath);
-		} catch (IOException e) {
+		if (deleteIfExists) {
+			try {
+				Files.deleteIfExists(csvFilePath);
+				Files.createFile(csvFilePath);
+			} catch (IOException e) {
+			}
 		}
 	}
-	
+
 	@Override
 	public void addHeader(List<String> headers) {
 		super.addHeader(headers);
-		byte[] bytes = getBytesForList(headers);
-		try {
-			Files.write(csvFilePath, bytes);
-		} catch (IOException e) {
+		if (deleteIfExists) {
+			byte[] bytes = getBytesForList(headers);
+			try {
+				Files.write(csvFilePath, bytes);
+			} catch (IOException e) {
+			}
 		}
 	}
-	
+
 	@Override
 	public void addRow(List<String> row) {
 		super.addRow(row);
@@ -50,7 +63,7 @@ public class ImmediateCSVWriter extends CSVCollector {
 		}
 		stringBuffer.deleteCharAt(stringBuffer.lastIndexOf(","));
 		stringBuffer.append("\n");
-		
+
 		byte[] bytes = stringBuffer.toString().getBytes();
 		return bytes;
 	}
