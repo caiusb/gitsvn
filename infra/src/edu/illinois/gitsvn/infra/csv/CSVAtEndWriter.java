@@ -19,6 +19,12 @@ import java.util.List;
  */
 public class CSVAtEndWriter extends CSVCollector {
 	
+	private String fileName;
+	
+	public CSVAtEndWriter(String fileName) {
+		super(fileName);
+	}
+
 	/**
 	 * Dump the contents to the provided path. If a file already at the existing path is deleted.
 	 * 

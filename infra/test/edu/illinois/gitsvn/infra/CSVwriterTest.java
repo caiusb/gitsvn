@@ -27,7 +27,7 @@ public class CSVwriterTest {
 
 	@Before
 	public void setUp() {
-		csv = new CSVAtEndWriter();
+		csv = new CSVAtEndWriter("tempfile.csv");
 		headers = new String[] { "a", "b", "c" };
 		row1 = new String[]{"1", "2", "3"};
 		row2 = new String[]{"11", "22", "22"};

@@ -20,6 +20,7 @@ public class ImmediateCSVWriter extends CSVCollector {
 	}
 
 	public ImmediateCSVWriter(String csvFile, boolean deleteIfExists) {
+		super(csvFile);
 		this.deleteIfExists = deleteIfExists;
 		csvFilePath = Paths.get(csvFile);
 		if (deleteIfExists) {

@@ -6,10 +6,12 @@ import java.util.List;
 
 public abstract class CSVCollector implements CSVWriter {
 
+	protected String fileName;
 	protected List<List<String>> rows;
 	protected List<String> headers;
 
-	public CSVCollector() {
+	public CSVCollector(String fileName) {
+		this.fileName = fileName;
 		rows = new ArrayList<>();
 		headers = new LinkedList<>();
 	}
