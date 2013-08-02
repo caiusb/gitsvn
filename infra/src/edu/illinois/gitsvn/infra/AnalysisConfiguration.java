@@ -14,7 +14,6 @@ import edu.illinois.gitsvn.infra.collectors.diff.ModifyDiffCountFilter;
 import edu.illinois.gitsvn.infra.collectors.diff.ModifyFileAllLineNumberFilter;
 import edu.illinois.gitsvn.infra.collectors.diff.ModifyFileJavaLineNumberFilter;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
-import edu.illinois.gitsvn.infra.filters.MetadataService;
 import edu.illinois.gitsvn.infra.filters.blacklister.CVSManufacturedCommitBlacklister;
 import edu.illinois.gitsvn.infra.filters.blacklister.CopyrightJavadocImportBlacklister;
 import edu.illinois.gitsvn.infra.filters.blacklister.FileOperationBlacklister;
@@ -78,7 +77,6 @@ public abstract class AnalysisConfiguration {
 	 * @return
 	 */
 	protected PipelineCommitFilter configurePipelineAnalysis() {
-		MetadataService.getService().pushInfo(CSVCommitPrinter.PROJ_NAME_PROP, getProjectName());
 		PipelineCommitFilter pipeLineFilter = new PipelineCommitFilter();
 
 		pipeLineFilter.addFilter(FileOperationBlacklister.getAddDiffFilter());

@@ -18,7 +18,6 @@ import edu.illinois.gitsvn.infra.csv.CSVCollector;
 import edu.illinois.gitsvn.infra.csv.CSVWriter;
 import edu.illinois.gitsvn.infra.csv.ImmediateCSVWriter;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
-import edu.illinois.gitsvn.infra.filters.MetadataService;
 
 //TODO refactor this class to be a filter composite
 public class CSVCommitPrinter extends AnalysisFilter {
@@ -49,11 +48,9 @@ public class CSVCommitPrinter extends AnalysisFilter {
 
 	@Override
 	public void end() {
-		String projectName = MetadataService.getService().getInfo(PROJ_NAME_PROP);
 		try {
 			csv.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
