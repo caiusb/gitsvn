@@ -47,7 +47,7 @@ public class CSVCommitPrinter extends AnalysisFilter {
 	public void end() {
 		String projectName = MetadataService.getService().getInfo(PROJ_NAME_PROP);
 		try {
-			csv.dumpToFile("../../results/" + projectName + ".csv");
+			csv.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

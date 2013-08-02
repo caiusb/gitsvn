@@ -38,8 +38,7 @@ public class CSVAtEndWriter extends CSVCollector {
 		Files.write(path, content.toString().getBytes());
 	}
 	
-	private String getCSVString(){
-		return constructCSV();
+	public void close() throws IOException {
 	}
 
 	private String constructCSV() {
