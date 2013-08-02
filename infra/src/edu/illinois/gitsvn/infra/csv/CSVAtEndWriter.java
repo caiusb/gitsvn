@@ -46,8 +46,9 @@ public class CSVAtEndWriter extends CSVCollector {
 	
 	@Override
 	public void close() throws IOException {
+		dumpToFile(fileName);
 	}
-
+	
 	private String constructCSV() {
 		StringBuffer content = new StringBuffer();
 
