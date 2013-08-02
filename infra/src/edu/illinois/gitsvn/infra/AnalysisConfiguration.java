@@ -98,7 +98,7 @@ public abstract class AnalysisConfiguration {
 		pipeLineFilter.addDataCollector(new IssuesCollector());
 		pipeLineFilter.addDataCollector(new BranchCollector(getGitRepo().getRepository()));
 
-		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
+		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter, getProjectName());
 		pipeLineFilter.setDataAgregator(agregator);
 		return pipeLineFilter;
 	}
