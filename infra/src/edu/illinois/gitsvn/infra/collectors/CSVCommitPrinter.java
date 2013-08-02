@@ -14,8 +14,9 @@ import org.gitective.core.filter.commit.CommitFilter;
 
 import edu.illinois.gitsvn.infra.DataCollector;
 import edu.illinois.gitsvn.infra.PipelineCommitFilter;
-import edu.illinois.gitsvn.infra.csv.CSVAtEndWriter;
+import edu.illinois.gitsvn.infra.csv.CSVCollector;
 import edu.illinois.gitsvn.infra.csv.CSVWriter;
+import edu.illinois.gitsvn.infra.csv.ImmediateCSVWriter;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
 import edu.illinois.gitsvn.infra.filters.MetadataService;
 
@@ -24,8 +25,9 @@ public class CSVCommitPrinter extends AnalysisFilter {
 	
 	public static final String PROJ_NAME_PROP = "ProjectName";
 
-	private CSVAtEndWriter csv;
+	private CSVCollector csv;
 	private List<DataCollector> allCollectors;
+	private final String projectName;
 	
 	public CSVCommitPrinter(PipelineCommitFilter filter) {
 		super(filter);
@@ -33,7 +35,7 @@ public class CSVCommitPrinter extends AnalysisFilter {
 	
 	@Override
 	public void begin() {
-		csv = new CSVAtEndWriter();
+		csv = new ImmediateCSVWriter(projectName,false);
 		List<String> headerData = new ArrayList<>();
 		
 		allCollectors = filter.getAllCollectors();
