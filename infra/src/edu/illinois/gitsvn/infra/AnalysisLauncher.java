@@ -20,8 +20,11 @@ import org.eclipse.core.resources.ResourcesPlugin;
  */
 public abstract class AnalysisLauncher {
 	
-	public static String INIT_LINE = "edu.illinois.gitsvn.initline";
-	public static String RECOVERY_LINE = "edu.illinois.gitsvn.recoveryline";
+	public static final String INIT_LINE = "edu.illinois.gitsvn.initline";
+	public static final String RECOVERY_LINE = "edu.illinois.gitsvn.recoveryline";
+	public static final String INIT_LINE_SEPARATOR = ",";
+	public static final String RECOVERY_LINE_SEPARATOR = ";";
+	public static final String COMMIT_SEPARATOR = ",";
 
 	/**
 	 * Starts the analysis. 

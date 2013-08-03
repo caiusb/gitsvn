@@ -12,7 +12,7 @@ public class StartProjectLauncher extends AnalysisLauncher {
 	protected void populateWithConfigurations(List<AnalysisConfiguration> configurations) {
 		String initLine = System.getProperty(INIT_LINE);
 		
-		String[] split = initLine.split(",");
+		String[] split = initLine.split(INIT_LINE_SEPARATOR);
 		String repoPath = split[0];
 		String projectName = split[1];
 		int cutoff = Integer.parseInt(split[2]);
