@@ -12,8 +12,14 @@ import edu.illinois.gitsvn.infra.PipelineCommitFilter;
 public abstract class AnalysisFilter extends CommitFilter implements AnalysisLifecycle{
 
 	protected PipelineCommitFilter filter;
+	protected final String projectName;
 	
-	public AnalysisFilter(PipelineCommitFilter filter) {
+	public AnalysisFilter(PipelineCommitFilter filter, String projectName) {
 		this.filter = filter;
+		this.projectName = projectName;
+	}
+	
+	public String getProjectName() {
+		return projectName;
 	}
 }

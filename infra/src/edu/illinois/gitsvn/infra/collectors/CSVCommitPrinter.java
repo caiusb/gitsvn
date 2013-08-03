@@ -26,12 +26,9 @@ public class CSVCommitPrinter extends AnalysisFilter {
 
 	private CSVCollector csv;
 	private List<DataCollector> allCollectors;
-
-	private final String projectName;
 	
 	public CSVCommitPrinter(PipelineCommitFilter filter, String projectName) {
-		super(filter);
-		this.projectName = projectName;
+		super(filter, projectName);
 	}
 	
 	@Override
