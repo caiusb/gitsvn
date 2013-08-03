@@ -3,6 +3,8 @@ package edu.illinois.gitsvn.analysis.launchers;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Test;
+
 import edu.illinois.gitsvn.analysis.SpecificCommitStartCutoffAnalysis;
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.AnalysisLauncher;
@@ -22,6 +24,11 @@ public class RecoverableLauncher extends AnalysisLauncher {
 		int cutoffTime = Integer.parseInt(System.getProperty(CUTOFF_PROPERTY));
 
 		configurations.add(new SpecificCommitStartCutoffAnalysis(repoPath, projectName, commitIDs, cutoffTime));
+	}
+	
+	@Test
+	public void test() throws Exception {
+		run();
 	}
 
 }
