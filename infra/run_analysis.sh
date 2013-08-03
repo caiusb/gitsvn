@@ -43,6 +43,23 @@ COLLECTOR_CLASSPATH="$ECLIPSE_HOME/plugins/org.eclipse.jdt.junit_3.7.0.v20110928
 :$ECLIPSE_HOME/plugins/org.eclipse.equinox.app_1.3.100.v20110321.jar\
 :$PROJECT_HOME/workspace/PDETestUtils/bin"
 
-$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
+ECLIPSE_TEST_CLASSPATH="$ECLIPSE_HOME/plugins/org.eclipse.equinox.launcher_1.2.0.v20110502.jar \
+org.eclipse.equinox.launcher.Main"
 
-$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M -Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 -classpath /home/brind/eclipse/plugins/org.eclipse.equinox.launcher_1.2.0.v20110502.jar org.eclipse.equinox.launcher.Main -os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 -port $PORT_NO -testLoaderClass org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader -loaderpluginname org.eclipse.jdt.junit4.runtime -classNames edu.illinois.gitsvn.analysis.launchers.SvnToGitRepoAnalysisLauncher -application org.eclipse.pde.junit.runtime.uitestapplication -product org.eclipse.sdk.ide -data /home/brind/gitsvn/workspace/../junit-workspace -configuration file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ -dev file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties -os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -testpluginname infra
+$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH \
+pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
+
+$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
+-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
+-classpath $ECLIPSE_TEST_CLASSPATH \
+-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 \
+-port $PORT_NO \
+-testLoaderClass org.eclipse.jdt.internal.junit4.runner.JUnit4TestLoader \
+-loaderpluginname org.eclipse.jdt.junit4.runtime \
+-classNames edu.illinois.gitsvn.analysis.launchers.SvnToGitRepoAnalysisLauncher \
+-application org.eclipse.pde.junit.runtime.uitestapplication -product org.eclipse.sdk.ide \
+-data /home/brind/gitsvn/workspace/../junit-workspace \
+-configuration file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ \
+-dev file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
+-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
+-testpluginname infra
