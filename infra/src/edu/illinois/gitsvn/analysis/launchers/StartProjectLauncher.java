@@ -10,9 +10,12 @@ public class StartProjectLauncher extends AnalysisLauncher {
 
 	@Override
 	protected void populateWithConfigurations(List<AnalysisConfiguration> configurations) {
-		String repoPath = System.getProperty(RecoverableLauncher.REPO_PATH_PROPERTY);
-		String projectName = System.getProperty(RecoverableLauncher.PROJECT_NAME_PROPERTY);
-		int cutoff = Integer.parseInt(System.getProperty(RecoverableLauncher.CUTOFF_PROPERTY));
+		String initLine = System.getProperty(INIT_LINE);
+		
+		String[] split = initLine.split(",");
+		String repoPath = split[0];
+		String projectName = split[1];
+		int cutoff = Integer.parseInt(split[2]);
 		
 		configurations.add(new CutoffGenericAnalysis(repoPath, projectName, cutoff));
 	}
