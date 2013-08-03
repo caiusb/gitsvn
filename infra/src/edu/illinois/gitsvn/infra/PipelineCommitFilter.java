@@ -14,6 +14,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.gitective.core.filter.commit.CommitFilter;
 
+import edu.illinois.gitsvn.infra.collectors.CollectorOperationException;
 import edu.illinois.gitsvn.infra.filters.AnalysisFilter;
 
 public class PipelineCommitFilter extends CommitFilter {
@@ -58,7 +59,10 @@ public class PipelineCommitFilter extends CommitFilter {
 		}
 
 		for (CommitFilter collector : collectors) {
-			collector.include(walker, cmit);
+			try {
+				collector.include(walker, cmit); 
+			} catch (CollectorOperationException e) {
+			}
 		}
 
 		dataAgregator.include(walker, cmit);

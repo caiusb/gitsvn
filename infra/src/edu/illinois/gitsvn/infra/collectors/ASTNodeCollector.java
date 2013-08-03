@@ -19,6 +19,7 @@ import org.gitective.core.BlobUtils;
 import org.gitective.core.filter.commit.DiffCountFilter;
 
 import edu.illinois.codingtracker.operations.ast.ASTOperation;
+import edu.illinois.codingtracker.tests.postprocessors.ast.ASTNodeOperationException;
 import edu.illinois.codingtracker.tests.postprocessors.ast.AddDeleteUpdateInferencePostprocessor;
 import edu.illinois.gitsvn.infra.DataCollector;
 import edu.illinois.gitsvn.infra.filters.blacklister.NonSourceCodeFileExtensionBlacklister;
@@ -74,6 +75,8 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 							.getDiffAsASTNodeOperations(oldFileContent, newFileContent);
 					setOfOperationForLastCommit = diffAsASTNodeOperations;
 				} catch (CoreException e) {
+				} catch (ASTNodeOperationException e) {
+					throw new CollectorOperationException(e);
 				}
 				break;
 			default:
