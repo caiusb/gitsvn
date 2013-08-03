@@ -19,6 +19,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
  *
  */
 public abstract class AnalysisLauncher {
+	
+	public static String INIT_LINE = "edu.illinois.gitsvn.initline";
+	public static String RECOVERY_LINE = "edu.illinois.gitsvn.recoveryline";
 
 	/**
 	 * Starts the analysis. 

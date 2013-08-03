@@ -18,11 +18,15 @@ public class RecoverableLauncher extends AnalysisLauncher {
 
 	@Override
 	protected void populateWithConfigurations(List<AnalysisConfiguration> configurations) {
-		String repoPath = System.getProperty(REPO_PATH_PROPERTY);
-		String projectName = System.getProperty(PROJECT_NAME_PROPERTY);
-		List<String> commitIDs = Arrays.asList(System.getProperty(COMMIT_IDS_PROPERTY).split(";"));
-		int cutoffTime = Integer.parseInt(System.getProperty(CUTOFF_PROPERTY));
-
+		String recoveryLine = System.getProperty(RECOVERY_LINE);
+		
+		String[] split = recoveryLine.split(";");
+		String repoPath = split[0];
+		String projectName = split[1];
+		String commitIDsAsString = split[2];
+		List<String> commitIDs = Arrays.asList(commitIDsAsString.split(","));
+		int cutoffTime = Integer.parseInt(split[3]);
+		
 		configurations.add(new SpecificCommitStartCutoffAnalysis(repoPath, projectName, commitIDs, cutoffTime));
 	}
 	
