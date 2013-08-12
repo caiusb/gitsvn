@@ -47,5 +47,9 @@ public class CutofDetectorFilter extends CommitFilter implements AbstractSVNDete
 	public String getMode() {
 		return getDataForCommit();
 	}
+	
+	public int getCutoff() {
+		return cutofTime;
+	}
 
 }
