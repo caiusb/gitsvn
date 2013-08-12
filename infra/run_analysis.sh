@@ -68,9 +68,9 @@ do
 	-loaderpluginname org.eclipse.jdt.junit4.runtime \
 	-classNames edu.illinois.gitsvn.analysis.launchers.StartProjectLauncher \
 	-application org.eclipse.pde.junit.runtime.uitestapplication -product org.eclipse.sdk.ide \
-	-data /home/brind/gitsvn/workspace/../junit-workspace \
-	-configuration file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ \
-	-dev file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
+	-data $PROJECT_HOME/workspace/../junit-workspace \
+	-configuration file:$PROJECT_HOME/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ \
+	-dev file:$PROJECT_HOME/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
 	-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
 	-testpluginname infra
 
@@ -92,9 +92,9 @@ do
 		-loaderpluginname org.eclipse.jdt.junit4.runtime \
 		-classNames edu.illinois.gitsvn.analysis.launchers.RecoverableLauncher \
 		-application org.eclipse.pde.junit.runtime.uitestapplication -product org.eclipse.sdk.ide \
-		-data /home/brind/gitsvn/workspace/../junit-workspace \
-		-configuration file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ \
-		-dev file:/home/brind/gitsvn/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
+		-data $PROJECT_HOME/workspace/../junit-workspace \
+		-configuration file:$PROJECT_HOMEworkspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/ \
+		-dev file:$PROJECT_HOME/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
 		-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
 		-testpluginname infra
 	done
