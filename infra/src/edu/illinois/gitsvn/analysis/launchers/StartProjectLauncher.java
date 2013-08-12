@@ -2,6 +2,8 @@ package edu.illinois.gitsvn.analysis.launchers;
 
 import java.util.List;
 
+import org.junit.Test;
+
 import edu.illinois.gitsvn.analysis.CutoffGenericAnalysis;
 import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 import edu.illinois.gitsvn.infra.AnalysisLauncher;
@@ -18,6 +20,11 @@ public class StartProjectLauncher extends AnalysisLauncher {
 		int cutoff = Integer.parseInt(split[2]);
 		
 		configurations.add(new CutoffGenericAnalysis(repoPath, projectName, cutoff));
+	}
+	
+	@Test
+	public void test() throws Exception {
+		run();
 	}
 
 }
