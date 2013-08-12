@@ -55,6 +55,7 @@ JUNIT_LISTENER="$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH
 
 while read init_line
 do
+	echo "Running for $init_line"
 
 	$JUNIT_LISTENER
 
