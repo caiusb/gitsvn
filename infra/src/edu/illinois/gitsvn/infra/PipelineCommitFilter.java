@@ -76,8 +76,9 @@ public class PipelineCommitFilter extends CommitFilter {
 					}
 				}
 				String projectName = dataAgregator.getProjectName();
+				String repoPath = repository.getWorkTree().getAbsolutePath();
 				List<String> queue = walker.getQueue();
-				String restoreString = getRestoreString(projectName, queue, cutoffTime);
+				String restoreString = getRestoreString(repoPath, projectName, queue, cutoffTime);
 				saveRestorePoint(restoreString);
 				throw e;
 			}
@@ -88,8 +89,10 @@ public class PipelineCommitFilter extends CommitFilter {
 		return true;
 	}
 	
-	protected String getRestoreString(String projectName, List<String> queue, int cutoffTime) {
+	protected String getRestoreString(String repoPath, String projectName, List<String> queue, int cutoffTime) {
 		StringBuffer buffer = new StringBuffer();
+		buffer.append(repoPath);
+		buffer.append(RecoverableLauncher.RECOVERY_LINE_SEPARATOR);
 		buffer.append(projectName);
 		buffer.append(RecoverableLauncher.RECOVERY_LINE_SEPARATOR);
 		boolean first = true;

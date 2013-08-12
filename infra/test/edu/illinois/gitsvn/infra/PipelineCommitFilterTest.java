@@ -18,14 +18,14 @@ public class PipelineCommitFilterTest extends GitTestCase {
 	
 	@Test
 	public void generateStringForNoCommits() {
-		String string = filter.getRestoreString("TestProject", new ArrayList<String>(), 123);
-		assertEquals("TestProject;;123",string);
+		String string = filter.getRestoreString("/test", "TestProject", new ArrayList<String>(), 123);
+		assertEquals("/test;TestProject;;123",string);
 	}
 	
 	@Test
 	public void generateStringForOneCommit() {
-		String string = filter.getRestoreString("TestProject", Arrays.asList(new String[]{ "abc" }), 123);
-		assertEquals("TestProject;abc;123", string);
+		String string = filter.getRestoreString("/test", "TestProject", Arrays.asList(new String[]{ "abc" }), 123);
+		assertEquals("/test;TestProject;abc;123", string);
 	}
 
 }
