@@ -5,7 +5,7 @@ ECLIPSE_HOME="/home/brind/eclipse"
 PROJECT_HOME="/home/brind/gitsvn"
 PROJECT_NAME="SvnToGit"
 PORT_NO=1999
-COLLEC TOR_CLASSPATH="$ECLIPSE_HOME/plugins/org.eclipse.jdt.junit_3.7.0.v20110928-1453.jar\
+COLLECTOR_CLASSPATH="$ECLIPSE_HOME/plugins/org.eclipse.jdt.junit_3.7.0.v20110928-1453.jar\
 :$ECLIPSE_HOME/plugins/org.eclipse.jdt.junit.core_3.7.0.v20110928-1453.jar\
 :$ECLIPSE_HOME/plugins/org.apache.ant_1.8.2.v20120109-1030/lib/ant-antlr.jar\
 :$ECLIPSE_HOME/plugins/org.apache.ant_1.8.2.v20120109-1030/lib/ant-apache-bcel.jar\
@@ -60,7 +60,7 @@ do
 
 	$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 	-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
-	-Dedu.illinois.gitsvn.initline=$init_line
+	-Dedu.illinois.gitsvn.initline=$init_line \
 	-classpath $ECLIPSE_TEST_CLASSPATH \
 	-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 \
 	-port $PORT_NO \
@@ -84,7 +84,7 @@ do
 
 		$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 		-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
-		-Dedu.illinois.gitsvn.recoveryLine=$rec_line
+		-Dedu.illinois.gitsvn.recoveryLine=$rec_line \
 		-classpath $ECLIPSE_TEST_CLASSPATH \
 		-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 \
 		-port $PORT_NO \
