@@ -27,5 +27,4 @@ public class PipelineCommitFilterTest extends GitTestCase {
 		String string = filter.getRestoreString("/test", "TestProject", Arrays.asList(new String[]{ "abc" }), 123);
 		assertEquals("/test;TestProject;abc;123", string);
 	}
-
 }
