@@ -51,13 +51,14 @@ RECOVERY_FILE="$CSV_FILES/restore_point.txt"
 REPO_LOC="../../svnToGitRepos"
 
 JUNIT_LISTENER="$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH \
-	pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &"
+pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &"
 
 while read init_line
 do
 	echo "Running for $init_line"
 
-	$JUNIT_LISTENER
+	$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH \
+pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 
 	$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 	-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
@@ -75,13 +76,14 @@ do
 	-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
 	-testpluginname infra
 
-	while [ -e $RECOVERY_FILE]
+	while [ -e $RECOVERY_FILE ]
 	do
 		rec_line=$(head -n 1 $RECOVERY_FILE)
 
 		rm $RECOVERY_FILE
 
-		$JUNIT_LISTENER
+		$JAVA_EXEC -Dfile.encoding=UTF-8 -classpath $COLLECTOR_CLASSPATH \
+pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 
 		$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 		-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
