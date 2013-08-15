@@ -63,6 +63,7 @@ pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 	$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 	-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
 	-Dedu.illinois.gitsvn.initline=$init_line \
+	-DAST_INFERENCE_MODE=1 \
 	-classpath $ECLIPSE_TEST_CLASSPATH \
 	-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 \
 	-port $PORT_NO \
@@ -90,6 +91,7 @@ pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 		$JAVA_EXEC -Xms128m -Xmx12g -XX:MaxPermSize=512M \
 		-Declipse.pde.launch=true -Declipse.p2.data.area=@config.dir/p2 -Dfile.encoding=UTF-8 \
 		-Dedu.illinois.gitsvn.recoveryLine=$rec_line \
+		-DAST_INFERENCE_MODE=1 \
 		-classpath $ECLIPSE_TEST_CLASSPATH \
 		-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog -version 3 \
 		-port $PORT_NO \
