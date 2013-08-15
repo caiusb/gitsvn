@@ -76,6 +76,8 @@ pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 	-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
 	-testpluginname infra
 
+	killall java
+
 	while [ -e $RECOVERY_FILE ]
 	do
 		rec_line=$(head -n 1 $RECOVERY_FILE)
@@ -100,6 +102,8 @@ pde.test.utils.PDETestResultsCollector $PROJECT_NAME $PORT_NO &
 		-dev file:$PROJECT_HOME/workspace/.metadata/.plugins/org.eclipse.pde.core/pde-junit/dev.properties \
 		-os linux -ws gtk -arch x86_64 -nl en_US -consoleLog \
 		-testpluginname infra
+
+		killall java
 	done
 
 done
