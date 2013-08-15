@@ -1,2 +1,2 @@
-../../svnToGitRepos/junit;JUnit;1231818542
+../../svnToGitRepos/junit,JUnit,1231818542
 
