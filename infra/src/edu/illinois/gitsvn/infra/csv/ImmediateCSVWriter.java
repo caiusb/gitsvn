@@ -29,6 +29,13 @@ public class ImmediateCSVWriter extends CSVCollector {
 				Files.createFile(csvFilePath);
 			} catch (IOException e) {
 			}
+		} else {
+			if (!Files.exists(csvFilePath))
+				try {
+					Files.createFile(csvFilePath);
+				} catch (IOException e) {
+					System.out.println("FAIL!");
+				}
 		}
 	}
 
