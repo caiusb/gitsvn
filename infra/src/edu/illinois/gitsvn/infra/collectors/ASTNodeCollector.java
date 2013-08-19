@@ -58,6 +58,7 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	@Override
 	public boolean include(RevCommit commit, Collection<DiffEntry> diffs, int diffCount) {
 		setOfOperationForLastCommit = new HashSet<ASTOperation>();
+		System.out.println("In AST including " + commit.name());
 		for (DiffEntry diff : diffs) {
 			ChangeType changeType = diff.getChangeType();
 			String oldFileContent = "";
@@ -77,6 +78,8 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 				} catch (CoreException e) {
 				} catch (ASTNodeOperationException e) {
 					throw new CollectorOperationException(e);
+				} catch (Exception e) {
+					throw new CollectorOperationException();
 				}
 				break;
 			default:

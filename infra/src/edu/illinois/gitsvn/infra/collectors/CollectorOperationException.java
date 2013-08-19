@@ -13,5 +13,9 @@ public class CollectorOperationException extends RuntimeException {
 	public CollectorOperationException(ASTNodeOperationException e) {
 		super(e);
 	}
+	
+	public CollectorOperationException() {
+		super();
+	}
 
 }
