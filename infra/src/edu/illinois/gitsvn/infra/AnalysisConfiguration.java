@@ -19,6 +19,7 @@ import edu.illinois.gitsvn.infra.collectors.AuthorCollector;
 import edu.illinois.gitsvn.infra.collectors.BranchCollector;
 import edu.illinois.gitsvn.infra.collectors.CSVCommitPrinter;
 import edu.illinois.gitsvn.infra.collectors.DateCollector;
+import edu.illinois.gitsvn.infra.collectors.FilesCollector;
 import edu.illinois.gitsvn.infra.collectors.IssuesCollector;
 import edu.illinois.gitsvn.infra.collectors.SHACollector;
 import edu.illinois.gitsvn.infra.collectors.diff.ModifyDiffCountFilter;
@@ -105,6 +106,7 @@ public abstract class AnalysisConfiguration {
 		pipeLineFilter.addDataCollector(new ModifyFileAllLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 		pipeLineFilter.addDataCollector(new IssuesCollector());
+		pipeLineFilter.addDataCollector(new FilesCollector());
 		pipeLineFilter.addDataCollector(new BranchCollector(getGitRepo()));
 
 		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
