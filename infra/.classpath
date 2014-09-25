@@ -20,5 +20,12 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.jgit.pgm.test"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.jgit.test"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.jgit.ui"/>
+	<classpathentry kind="lib" path="lib/core-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/gen.jdt-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/gumtree/jdt-3.7.1.v_B76_R37x.jar"/>
+	<classpathentry kind="lib" path="lib/gumtree/junit-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/gumtree/simmetrics-1_6_2_d07_02_07.jar"/>
+	<classpathentry kind="lib" path="lib/gumtree/trove4j-3.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/gumtree/utils-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
