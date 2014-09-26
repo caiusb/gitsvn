@@ -75,6 +75,7 @@ public abstract class AnalysisConfiguration {
 	 * <li>A CSV ignore filter</li>
 	 * <li>A line number collector</li>
 	 * <li>A java line number collector</li>
+	 * <li>An AST Node collector</li>
 	 * <li>A CSV agregator</li>
 	 * </ul>
 	 * 
