@@ -42,6 +42,7 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	
 	@Override
 	public boolean include(RevCommit commit, Collection<DiffEntry> diffs, int diffCount) {
+		data = 0; //resetting the state for each commit
 		for (DiffEntry diff : diffs) {
 			ChangeType changeType = diff.getChangeType();
 			String oldFileContent = "";
@@ -74,7 +75,7 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 				ActionGenerator actionGenerator = new ActionGenerator(oldTree, newTree, matcher.getMappings());
 				actionGenerator.generate();
 				List<Action> actions = actionGenerator.getActions();
-				data = actions.size();
+				data += actions.size();
 			} catch (IOException e) {
 			}
 			
