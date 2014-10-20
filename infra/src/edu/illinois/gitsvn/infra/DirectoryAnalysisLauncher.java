@@ -15,9 +15,13 @@ import edu.illinois.gitsvn.analysis.GenericAnalysis;
 public class DirectoryAnalysisLauncher extends AnalysisLauncher {
 	
 	private String repositoryParentDir;
+	private final String resultsFolder;
+	private final String tempFolder;
 
-	public DirectoryAnalysisLauncher(String repositoryParentDir) {
+	public DirectoryAnalysisLauncher(String repositoryParentDir, String resultsFolder, String tempFolder) {
 		this.repositoryParentDir = repositoryParentDir;
+		this.resultsFolder = resultsFolder;
+		this.tempFolder = tempFolder;
 	}
 	
 	@Override
@@ -25,7 +29,7 @@ public class DirectoryAnalysisLauncher extends AnalysisLauncher {
 		File parent = new File(repositoryParentDir);
 		
 		for (File f : parent.listFiles()) {
-			configurations.add(new GenericAnalysis(f.getAbsolutePath(), f.getName()));
+			configurations.add(new GenericAnalysis(f.getAbsolutePath(), f.getName(), resultsFolder, tempFolder));
 		}
 	}
 }

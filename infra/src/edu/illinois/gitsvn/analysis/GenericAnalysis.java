@@ -18,10 +18,21 @@ import edu.illinois.gitsvn.infra.AnalysisConfiguration;
 public class GenericAnalysis extends AnalysisConfiguration {
 	private String repoDir;
 	private String projectName;
+	private final String resultsFolder;
+	private final String tempFolder;
 
+	/**
+	 * @deprecated Use {@link #GenericAnalysis(String,String,String, String)} instead
+	 */
 	public GenericAnalysis(String repoDir, String projectName) {
+		this(repoDir, projectName, "../../results", "/Volumes/RAM Disk/");
+	}
+
+	public GenericAnalysis(String repoDir, String projectName, String resultsFolder, String tempFolder) {
 		this.repoDir = repoDir;
 		this.projectName = projectName;
+		this.resultsFolder = resultsFolder;
+		this.tempFolder = tempFolder;
 	}
 
 	@Override
@@ -36,5 +47,15 @@ public class GenericAnalysis extends AnalysisConfiguration {
 	@Override
 	protected String getProjectName() {
 		return projectName;
+	}
+	
+	@Override
+	protected String getResultsFolder() {
+		return resultsFolder;
+	}
+	
+	@Override
+	protected String getTemporaryFolder() {
+		return tempFolder;
 	}
 }

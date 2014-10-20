@@ -13,7 +13,7 @@ import edu.illinois.gitsvn.infra.collectors.SVNCommitDetectorFilter;
 public class GitSvnCutoffAnalysis extends GenericAnalysis {
 
 	public GitSvnCutoffAnalysis(String repoDir, String projectName) {
-		super(repoDir, projectName);
+		super(repoDir, projectName, "../../results", "/Volumes/RAM Disk");
 	}
 
 	@Override

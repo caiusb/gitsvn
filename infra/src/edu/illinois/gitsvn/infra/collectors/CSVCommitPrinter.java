@@ -1,6 +1,7 @@
 package edu.illinois.gitsvn.infra.collectors;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,12 @@ public class CSVCommitPrinter extends AnalysisFilter {
 
 	private CSVWriter csv;
 	private List<DataCollector> allCollectors;
+
+	private final String resultsFolder;
 	
-	public CSVCommitPrinter(PipelineCommitFilter filter) {
+	public CSVCommitPrinter(PipelineCommitFilter filter, String resultsFolder) {
 		super(filter);
+		this.resultsFolder = resultsFolder;
 	}
 	
 	@Override
@@ -46,7 +50,7 @@ public class CSVCommitPrinter extends AnalysisFilter {
 	public void end() {
 		String projectName = MetadataService.getService().getInfo(PROJ_NAME_PROP);
 		try {
-			csv.dumpToFile("../../results/" + projectName + ".csv");
+			csv.dumpToFile(Paths.get(resultsFolder, projectName + ".csv").toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

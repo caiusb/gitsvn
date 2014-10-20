@@ -3,6 +3,7 @@ package edu.illinois.gitsvn.infra.collectors;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +32,12 @@ import fr.labri.gumtree.tree.Tree;
 public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 	
 	private int data;
+	private final String tempFolder;
+	
+	public ASTNodeCollector(String tempFolder) {
+		this.tempFolder = tempFolder;
+		
+	}
 
 	@Override
 	protected TreeWalk createTreeWalk(RevWalk walker, RevCommit commit) {
@@ -58,8 +65,8 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 				break;
 			}
 			
-			File oldContentFile = new File("A" + System.currentTimeMillis() + ".java");
-			File newContentFile = new File("B"+ System.currentTimeMillis() + ".java");
+			File oldContentFile = Paths.get(tempFolder,"A" + System.currentTimeMillis() + ".java").toFile();
+			File newContentFile = Paths.get(tempFolder,"B"+ System.currentTimeMillis() + ".java").toFile();
 			
 			try {
 				oldContentFile.createNewFile();
@@ -77,6 +84,7 @@ public class ASTNodeCollector extends DiffCountFilter implements DataCollector {
 				List<Action> actions = actionGenerator.getActions();
 				data += actions.size();
 			} catch (IOException e) {
+				System.err.println("Error creating temporary file for the AST matcher.");
 			}
 			
 			oldContentFile.delete();

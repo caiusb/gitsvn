@@ -52,6 +52,8 @@ public class SvnToGitRepoAnalysisLauncher extends AnalysisLauncher {
 	}
 
 	public static void main(String[] args) throws Exception {
+		if (args.length < 1)
+			
 		new SvnToGitRepoAnalysisLauncher().run();
 	}
 }

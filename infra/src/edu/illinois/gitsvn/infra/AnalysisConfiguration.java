@@ -47,7 +47,7 @@ public abstract class AnalysisConfiguration {
 		RepositoryCrawler crawler = new RepositoryCrawler();
 		PipelineCommitFilter pipeline = configurePipelineAnalysis();
 		Git repo = getGitRepo();
-		branchesCheckout(repo);
+//		branchesCheckout(repo);
 
 		System.out.println("Running for: " + getProjectName());
 		crawler.crawlRepo(repo, pipeline);
@@ -107,12 +107,12 @@ public abstract class AnalysisConfiguration {
 		pipeLineFilter.addDataCollector(new AuthorCollector());
 		pipeLineFilter.addDataCollector(new ModifyFileAllLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
 		pipeLineFilter.addDataCollector(new ModifyFileJavaLineNumberFilter(ModifyDiffCountFilter.getCommentEditFilter(), ModifyDiffCountFilter.getFormatEditFilter()));
-		pipeLineFilter.addDataCollector(new IssuesCollector());
-		pipeLineFilter.addDataCollector(new FilesCollector());
-		pipeLineFilter.addDataCollector(new BranchCollector(getGitRepo()));
-		pipeLineFilter.addDataCollector(new ASTNodeCollector());
+//		pipeLineFilter.addDataCollector(new IssuesCollector());
+//		pipeLineFilter.addDataCollector(new FilesCollector());
+//		pipeLineFilter.addDataCollector(new BranchCollector(getGitRepo()));
+		pipeLineFilter.addDataCollector(new ASTNodeCollector(getTemporaryFolder()));
 
-		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter);
+		AnalysisFilter agregator = new CSVCommitPrinter(pipeLineFilter, getResultsFolder());
 		pipeLineFilter.setDataAgregator(agregator);
 		return pipeLineFilter;
 	}
@@ -158,5 +158,13 @@ public abstract class AnalysisConfiguration {
 				}
 			}
 		}
+	}
+
+	protected String getResultsFolder() {
+		return "../../results";
+	}
+	
+	protected String getTemporaryFolder() {
+		return "/Volumes/RAM Disk/";
 	}
 }

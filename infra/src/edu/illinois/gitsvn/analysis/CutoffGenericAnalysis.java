@@ -8,7 +8,7 @@ public class CutoffGenericAnalysis extends GenericAnalysis {
 	private int cutoffPoint; //time stamp of last SVN commit
 
 	public CutoffGenericAnalysis(String repoDir, String projectName, int cutoffTime) {
-		super(repoDir, projectName);
+		super(repoDir, projectName, "../../results", "/Volumes/RAM Disk");
 		this.cutoffPoint = cutoffTime;
 	}
 	

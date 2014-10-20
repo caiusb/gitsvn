@@ -9,7 +9,7 @@ public class ASTNodeCollectorTest extends DataCollectorTestCase {
 	
 	@Before
 	public void before() throws IOException {
-		initTest(new ASTNodeCollector());
+		initTest(new ASTNodeCollector("/Volumes/RAM Disk"));
 	}
 	
 	@Test
